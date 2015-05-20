@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>路通货物运输管理系统-{% block title %}{% endblock %} </title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{{ asset((dd_home_url~"img/favicon/favicon.ico")) }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ asset((dd_home_url~"css/flexible-grids.css")) }}">
+    <link rel="stylesheet" href="{{ asset((dd_home_url~"css/style.css")) }}">
+    <!--[if lte IE 7]>
+    <link rel="stylesheet" href="{{ asset((dd_yaml_url~"core/iehacks.min.css")) }}">
+    <![endif]-->
+    {% block stylesheets %}{% endblock %}
+</head>
+<body>
+{% block header %}
+    <header>
+        <div class="ym-grid"    >
+            <h2 class="ym-g50 ym-gl" style="margin:20px;"><b style="padding-left: 10px;"><img width="37" height="37" src="{{ asset((dd_home_url~"img/u2.png")) }}">&nbsp;路通货物运输管理系统</b></h2>
+            <div class="ym-g40 ym-gr">
+                <div class="ym-wrapper">
+                    <div class="ym-hlist" style="margin:20px 0px;">
+                        <ul class="suche">
+                            <li><strong>账户名：{{ app.user.username }}</strong></li>
+                            <li>
+                            {% if is_granted('ROLE_员工') %}
+                                <a href=" /dd-admin/logout">退出</a>
+                            {% else %}
+                                <a href=" /dd-admin">登录</a>
+                            {% endif %}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+{% endblock %}
+<main class="main-box">
+    <div class="ym-grid linearize-level-1">
+        <div class="ym-g10 ym-gl">
+            <div class="ym-cbox nav">
+                <h3>导航菜单</h3>
+                <h4>运营管理</h4>
+                <ul>
+                    <li><a href="/yundan/yundan">系统开单</a></li>
+                    <li><a href="/deposit/deposit">外发录入</a></li>
+                    <li><a href="/deposit/list">外发管理</a></li>
+                </ul>
+                <h4>客户账款</h4>
+                <ul>
+                    <li><a href="/order/xianfu">现付收银</a></li>
+                    <li><a href="/order/qiankuan">欠款收银</a></li>
+                    <li><a href="/index">货款发放</a></li>
+                    <li><a href="/index">回扣发放</a></li>
+                </ul>
+                <h4>中转账款</h4>
+                <ul>
+                    <li><a href="/deposit/xianjie">中转现结</a></li>
+                    <li><a href="/deposit/qianfan">中转欠返</a></li>
+                    <li><a href="/deposit/jiekuan">中转结款</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="ym-g90 ym-gr">
+            <div style="padding: 4px;">
+            {% block main %}
+            {% endblock %}
+            </div>
+        </div>
+
+    </div>
+</main>
+
+{% block footer %}
+    <footer>
+        <p>版权所有@2015-2019  路通货物运输 </p>
+    </footer>
+    <script src="{{ asset((dd_home_url~"js/libs/jquery-1.4.4.min.js")) }}"></script>
+{% endblock %}
+</div>
+{% block Scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,25 @@
+user_order:
+    resource: "@UserOrderBundle/Controller"
+    type:     annotation
+
+user_order_finance:
+    resource: "@UserOrderFinanceBundle/Controller"
+    type:     annotation
+
+user_deposit:
+    resource: "@UserDepositBundle/Controller"
+    type:     annotation
+
+user_deposit_finance:
+    resource: "@UserDepositFinanceBundle/Controller"
+    type:     annotation
+
+admin_user:
+    resource: "@AdminUserBundle/Controller"
+    type:     annotation
+
+_admin_user:
+    resource: "@AdminUserBundle/Resources/config/routing.yml"
+    prefix: /dd-admin
+
+

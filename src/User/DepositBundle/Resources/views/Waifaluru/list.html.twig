@@ -1,0 +1,58 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}外发录入{% endblock %}
+{% block main %}
+    <div>
+    <!-- MAIN PANEL -->
+    <form class="searchbar" role="" action="/deposit/list" method="get">
+        中转日期
+        从:<input type="text" class="ym-searchfield" name = 'dateStart' onclick ='WdatePicker()' readonly="true" value = {{ dateStart }}>
+        到:<input type="text" class="ym-searchfield" name = 'dateEnd'   onclick ='WdatePicker()'  readonly="true" value = {{ dateEnd }}>
+        承运公司:<input type="text" name = 'chengyungongsi' class="ym-searchfield" value = "{{ chengyungongsi }}">
+        中转单号:<input type="text" name = 'zhongzhuandan' class="ym-searchfield"  value = "{{ zhongzhuandan }}">
+        <input type="submit" class="ym-button ym-primary" value="查询">
+    </form>
+    <input id="shenhe" type="button" class="ym-button ym-success" value="审核"/>
+    <input id="fanshenhe" type="button" class="ym-button ym-danger" value="反审核"/>
+    <table class="bordertable">
+                <thead>
+                <tr>
+                    <th> <input id="chk_all" type="checkbox">全选</input> </th>
+                    <th>中转单号</th>
+                    <th>审核状态</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for waifa in list %}
+                    <tr>
+                        <td>
+                            {% if waifa.xianfushouyin or waifa.jiekuanshouyin %}
+                            {% else %}
+                                <input name="ids" type="checkbox" value="{{ waifa.id }}"/>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {{ waifa.zhongzhuandan }}
+                        </td>
+                        <td>
+                            {% if waifa.shenhe %} 已审核
+                            {% else %} 未审核
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if waifa.shenhe %} 查看
+                            {% else %} <a href="{{ path('_deposit_edit', { 'id': waifa.id }) }}">修改</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    <!-- END MAIN PANEL -->
+</div>
+{% endblock %}
+{% block Scripts %}
+     <script src="{{ asset((dd_home_url~"js/plugins/my97/WdatePicker.js")) }}"></script>
+    <script src="{{ asset((dd_home_url~"js/waifaluru.js")) }}"></script>
+{% endblock %}

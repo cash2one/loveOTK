@@ -1,0 +1,47 @@
+{% extends '::base.html.twig' %}
+{% block title %}外发录入{% endblock %}
+{% block main %}
+    <div>
+        <form class="searchbar" role="" action="/deposit/deposit" method="">
+            开单日期
+            从:<input type="text" class="ym-searchfield" name = 'dateStart' onclick ='WdatePicker()' readonly="true" value = {{ dateStart }}>
+            到:<input type="text" class="ym-searchfield" name = 'dateEnd'   onclick ='WdatePicker()'  readonly="true" value = {{ dateEnd }}>
+            发货人:<input type="text" class="ym-searchfield">
+            运单:<input type="text" class="ym-searchfield">
+            <input type="submit" class="ym-button ym-primary" value="查询">
+        </form>
+        <table class="bordertable">
+                <thead>
+                <tr>
+                    <th>运单号</th>
+                    <th>目的城市</th>
+                    <th>品名</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for yundan in list %}
+                    <tr>
+                        <td>
+                            {{ yundan.awbno }}
+                        </td>
+                        <td>
+                            {{ yundan.city }}
+                        </td>
+                        <td>
+                            {{ yundan.pinming }}
+                        </td>
+                        <td>
+                            <a href="{{ path('_deposit_new', { 'yundanid': yundan.id }) }}">外发录入</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+    </div>
+    <!-- END MAIN PANEL -->
+{% endblock %}
+{% block Scripts %}
+    <script src="{{ asset((dd_home_url~"js/plugins/my97/WdatePicker.js")) }}"></script>
+{% endblock %}

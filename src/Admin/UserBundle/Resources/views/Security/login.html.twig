@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>登录页面</title>
+    <link rel="icon" href="{{ asset((dd_home_url~"img/favicon/favicon.ico")) }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ asset((dd_yaml_url~"core/base.css")) }}">
+    <link rel="stylesheet" href="{{ asset((dd_home_url~"css/login.css")) }}">
+    <!--[if lte IE 7]>
+    <link rel="stylesheet" href="{{ asset((dd_yaml_url~"core/iehacks.min.css")) }}">
+    <![endif]-->
+    <!--[if lt IE 9]>
+    <script src="./lib/html5shiv/html5shiv.js"></script>
+    <![endif]-->
+</head>
+<body>
+<header>
+    <div class="ym-grid">
+        <div class="login-header">
+        </div>
+    </div>
+</header>
+<div class="ym-grid login-body-bg">
+    <div class="ym-g60 ym-gl">
+        <div class="ym-gbox">
+          {#左侧背景图#}&nbsp;
+        </div>
+    </div>
+    <div class="ym-g40 ym-gr">
+        <div class="ym-gbox">
+            <form action="{{ path("_admin_login_check") }}" method="post"  id="login-form" class="login-bg">
+                <div style="padding-top: 180px;">
+                    {% if error %}
+                    <div class="error-box form-inline">
+                        <div class="text-error">登录失败</div>
+                    </div>
+                    {% endif %}
+                    <div class="form-inline">
+                        <label>账&nbsp;&nbsp;号:</label>
+                        <input type="text"  id="username" name="_username" value="{{ last_username }}" placeholder="输入账号"/>
+                    </div>
+                    <div class="form-inline">
+                        <label>密&nbsp;&nbsp;码:</label>
+                        <input type="password"  id="password" name="_password" placeholder="输入密码"/>
+                    </div>
+                    <div>
+                        <div class="login-btn">
+                            <input type="submit" class="btn " value="登   录" />
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</body>

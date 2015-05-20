@@ -1,0 +1,98 @@
+{% extends '::base.html.twig' %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset((dd_home_url~"js/plugins/XYTipsWindow/js/core/core.css")) }}">
+{% endblock %}
+{% block title %}现付收银{% endblock %}
+{% block main %}
+    {% set money = 0 %}
+    <div>
+        <form class="searchbar" role="" action="/order/xianfu" method="get">
+            开单日期
+            从:<input type="text" class="ym-searchfield" name='dateStart' onclick='WdatePicker()' readonly="true"
+                     value= {{ dateStart }}>
+            到:<input type="text" class="ym-searchfield" name='dateEnd' onclick='WdatePicker()' readonly="true"
+                     value= {{ dateEnd }}>
+            收银确认:<select name="xianfu">
+                {% if xianfu is empty%}
+                <option value=""selected="true">全部</option>
+                <option value="0">未收银</option>
+                <option value="1">已收银</option>
+                {% else %}
+                    {% if xianfu == 0 %}
+                        <option value="">全部</option>
+                        <option value="0" selected="true">未收银</option>
+                        <option value="1">已收银</option>
+                    {% else %}
+                        <option value="">全部</option>
+                        <option value="0">未收银</option>
+                        <option value="1" selected="true">已收银</option>
+                    {% endif %}
+                {% endif %}
+            </select>
+            发货人:<input type="text" class="ym-searchfield" name="name" value="{{ name }}">
+            运单:<input type="text" class="ym-searchfield" name="awbno" value="{{ awbno }}">
+            <input type="submit" class="ym-button ym-primary" value="查询">
+        </form>
+        <input id="shouyin" type="button" class="ym-button ym-success" value="确认收银"/>
+        <input id="quxiaoshouyin" type="button" class="ym-button ym-danger" value="取消确认"/>
+        <table class="bordertable">
+            <thead>
+            <tr>
+                <th><input id="chk_all" type="checkbox">选择</input> </th>
+                <th>运单号</th>
+                <th>开单日期</th>
+                <th>目的城市</th>
+                <th>现付</th>
+                <th>收银确认</th>
+                <th>收银时间</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for yundan in list %}
+                <tr>
+                    <td>
+                        <input name="ids" type="checkbox" value="{{ yundan.id }}"/>
+                    </td>
+                    <td>
+                        {{ yundan.awbno }}
+                    </td>
+                    <td>
+                        {{ yundan.lastUpdated|date('Y-m-d') }}
+                    </td>
+                    <td>
+                        {{ yundan.xianlu }}
+                    </td>
+                    <td>
+                        {{ yundan.xianfu }}
+                    </td>
+                    <td>
+                        {% if yundan.xianfushouyin %} 已收银
+                        {% else %}  未收银{% set money = money + yundan.xianfu %}
+                        {% endif %}
+                    </td>
+                    <td>
+                       {{ yundan.datexianfushouyin|date('Y-m-d') }}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+        <div class="ym-g100 total-box">
+            <p id="zongji">总计欠费: {{ money }}</p>
+        </div>
+    </div>
+{% endblock %}
+{% block Scripts %}
+    <script type="text/javascript">
+        if (typeof Util == "undefined") var Util = {};
+        //配置信息
+        Util.config = {
+            JSfile: "{{ asset((dd_home_url~"js/plugins/XYTipsWindow/js/core/")) }}",					//设置JS文件夹路径
+            loadingICO: " {{ asset((dd_home_url~"js/plugins/XYTipsWindow/js/core/loading.gif")) }}"		//默认载入时图片路径
+        };
+    </script>
+    <script src="{{ asset((dd_home_url~"js/plugins/XYTipsWindow/js/core/XY_Base.js")) }}"></script>
+    <script src="{{ asset((dd_home_url~"js/plugins/XYTipsWindow/js/core/XY_Dialog.js")) }}"></script>
+    <script src="{{ asset((dd_home_url~"js/plugins/my97/WdatePicker.js")) }}"></script>
+    <script src="{{ asset((dd_home_url~"js/xianfu.js")) }}"></script>
+{% endblock %}

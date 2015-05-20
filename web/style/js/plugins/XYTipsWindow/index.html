@@ -1,0 +1,512 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+ <title>XYTipsWindow 3.0 Demo By [Await]</title>
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+ <meta http-equiv="Content-Language" content="zh-CN" />
+ <meta name="Keywords" content="" />
+ <meta name="Description" content="" />
+ <link rel="stylesheet" href="demo/style.css" type="text/css" media="all" />
+ <!--[if lt IE 9]>
+	<link rel="stylesheet" href="demo/ie.css" type="text/css" media="all" />
+ <![endif]-->
+ <link rel="stylesheet" href="demo/hl-all.css" type="text/css" media="all" />
+ <script type="text/javascript" src="demo/hl-all.js"></script>
+ <script type="text/javascript" src="js/jquery-1.4.4.min.js"></script>
+ <script type="text/javascript">
+	if (typeof Util == "undefined") var Util = {};
+	//配置信息
+	Util.config = {
+		JSfile: "js/core/",					//设置JS文件夹路径
+		loadingICO: "js/core/loading.gif"		//默认载入时图片路径
+	};
+ </script>
+ <script type="text/javascript" src="js/core/XY_Base.js"></script>
+ <script type="text/javascript" src="demo/demo.js?0123"></script>
+ <script type="text/javascript">
+ jQuery(function($){
+	DlHighlight.HELPERS.highlightByName("code", "pre");
+	$(".wrap").height($("#container").outerHeight()+40)
+ });
+ </script>
+</head>
+
+<body id="page">
+<div class="wrap">
+	<div id="container">
+		<h1 id="Top">XYTipsWindow 3.1</h1>
+		<div class="nav">
+			<ul>
+				<li><a href="#home" title="">首页</a></li>
+				<li><a href="#about" title="">关于</a></li>
+				<li><a href="#api" title="">参数</a></li>
+				<li><a href="#show" title="">演示</a></li>
+				<li><a href="#update" title="">更新</a></li>
+				<li><a href="#download" title="">下载</a></li>
+				<li><a href="#donate" title="">捐助</a></li>
+			</ul>
+		</div>
+
+		<h3 id="about">关于插件：</h3>
+
+		<p class="content">一个基于jQuery的弹出层插件。支持多窗口，拖动，最大化最小化，固定定位，相对于某个位置定位，具有简化的Tips模式。可以自定义外观等等，具体的看参数和演示</p>
+
+		<h3 id="api">参数说明：</h3>
+		<div class="content">
+			<table width="500" border="0" class="api_table">
+				<tr>
+				  <td width="80"><span class="b">名称</span></td>
+				  <td colspan="3"><span class="b">说明</span></td>
+				</tr>
+				<tr>
+				  <td>type</td>
+				  <td colspan="3">弹出层类型，可选[dialog|tips]（默认为“dialog”）</td>
+				</tr>
+                <tr>
+				  <td>theme</td>
+				  <td colspan="3">弹出层风格[default]</td>
+				</tr>
+				<tr>
+				  <td>title</td>
+				  <td colspan="3">窗口标题文字</td>
+				</tr>
+				<tr>
+				  <td>boxID</td>
+				  <td colspan="3">弹出层ID，默认为一串随机生成的字符串（Util.random(10)）</td>
+				</tr>
+				<tr>
+				  <td>referID</td>
+				  <td colspan="3">相对于这个ID的位置进行定位</td>
+				</tr>
+				<tr>
+				  <td rowspan="5">content</td>
+				  <td rowspan="5">弹出层内容</td>
+				  <td>text</td>
+				  <td>文本内容，可以包含html标签</td>
+				</tr>
+				<tr>
+				  <td>img</td>
+				  <td>图片</td>
+				</tr>
+				<tr>
+				  <td>swf</td>
+				  <td>flash动画</td>
+				</tr>
+				<tr>
+				  <td>url</td>
+				  <td>url链接</td>
+				</tr>
+				<tr>
+				  <td>iframe</td>
+				  <td>框架</td>
+				</tr>
+				<tr>
+				  <td>width</td>
+				  <td colspan="3">窗口宽度(默认宽度为120px)</td>
+				</tr>
+				<tr>
+				  <td>height</td>
+				  <td colspan="3">窗口高度(默认高度为50px)</td>
+				</tr>
+				<tr>
+				  <td>time</td>
+				  <td colspan="3">自动关闭等待时间;(单位ms)</td>
+				</tr>
+				<tr>
+				  <td>drag</td>
+				  <td colspan="3">是否启用拖动( 默认为启用)</td>
+				</tr>
+				<tr>
+				  <td>lock</td>
+				  <td colspan="3">是否限制拖动范围</td>
+				</tr>
+				<tr>
+				  <td>fixed</td>
+				  <td colspan="3">是否开启固定定位</td>
+				</tr>
+				<tr>
+				  <td>showbg</td>
+				  <td colspan="3">是否显示遮罩层( 默认为false)</td>
+				</tr>
+				<tr>
+				  <td>showtitle</td>
+				  <td colspan="3">是否显示弹出层标题( 默认为显示)</td>
+				</tr>
+                <tr>
+				  <td>showborder</td>
+				  <td colspan="3">是否显示透明边框( 默认不显示)</td>
+				</tr>
+                <tr>
+				  <td>position</td>
+				  <td colspan="3">设定弹出层位置,默认居中;</td>
+				</tr>
+
+				<tr>
+				  <td rowspan="4">arrow</td>
+				  <td colspan="2" rowspan="4">箭头方向</td>
+				  <td>top</td>
+				</tr>
+				<tr>
+				  <td>right</td>
+				</tr>
+				<tr>
+				  <td>bottom</td>
+				</tr>
+				<tr>
+				  <td>left</td>
+				</tr>
+				<tr>
+				  <td rowspan="4">tips</td>
+				  <td rowspan="4">提示层设置</td>
+				  <td>val</td>
+				  <td>箭头偏移量</td>
+				  </tr>
+				<tr>
+				  <td>style</td>
+				  <td>提示层风格</td>
+				</tr>
+				<tr>
+				  <td>radius</td>
+				  <td>提示层圆角大小</td>
+				</tr>
+                <tr>
+				  <td>auto</td>
+				  <td>提示层位置自适应</td>
+				</tr>
+
+				<tr>
+				  <td>yesBtn</td>
+				  <td colspan="3">确定按扭{text: "文字", fn: function(){}}</td>
+				</tr>
+                <tr>
+				  <td>noBtn</td>
+				  <td colspan="3">取消按扭{text: "文字", fn: function(){}}</td>
+				</tr>
+				<tr>
+				  <td>ofns</td>
+				  <td colspan="3">弹出窗打开后执行的函数;</td>
+				</tr>
+                <tr>
+				  <td>cfns</td>
+				  <td colspan="3">弹出窗关闭后执行的函数;</td>
+				</tr>
+			</table>
+		</div>
+
+
+		<h3 id="show">演示：</h3>
+		<div class="content">
+			<ul class="show_list">
+				<li>
+					<p>弹出一个纯文本的层<span>arrow</span></p>
+
+<pre name="code" class="js">
+$("#btn_show_text").click(function() {
+	Util.Dialog({
+		title : "纯文本内容",
+		content : "text:文字"
+	});
+	return false;
+});
+</pre>
+					<button id="btn_show_text">点击测试</button>
+				</li>
+				<li>
+					<p>弹出一张图片并固定定位<span>arrow</span></p>
+
+<pre name="code" class="js">
+$("#btn_show_img").click(function() {
+	Util.Dialog({
+		boxID: "wordpressImg",
+		title : "wordpress 桌面壁纸",
+		fixed : true,
+		content : "img:http://leotheme.cn/wp-content/uploads/2008/09/tr2xcp6yw4o5xebj9s.jpg"
+	});
+	return false;
+});
+</pre>
+					<button id="btn_show_img">点击测试</button>
+				</li>
+				<li>
+					<p>弹出一个SWF动画<span>arrow</span></p>
+
+<pre name="code" class="js">
+$("#btn_show_flash").click(function() {
+	Util.Dialog({
+		boxID: "swfDialog",
+		title : "动画",
+		width : 230,
+		height : 100,
+		content : "swf:http://p.xinyour.com/images-01/bk_230x100.swf"
+	});
+	return false;
+});
+</pre>
+					<button id="btn_show_flash">点击测试</button>
+				</li>
+				<li>
+					<p>加载一个url路径并显示遮罩背景<span>arrow</span></p>
+
+<pre name="code" class="js">
+$("#btn_show_url").click(function() {
+	Util.Dialog({
+		title : "加载文件",
+		content : "url:get?test.html",
+		showbg: true
+	});
+	return false;
+});
+</pre>
+					<button id="btn_show_url">点击测试</button>
+				</li>
+				<li>
+					<p>在框架里登录淘宝<span>arrow</span></p>
+
+<pre name="code" class="js">
+$("#btn_show_iframe").click(function() {
+	Util.Dialog({
+		title : "登录淘宝",
+		content : "iframe:https://login.taobao.com"
+	});
+	return false;
+});
+</pre>
+					<button id="btn_show_iframe">点击测试</button>
+				</li>
+				<li>
+					<p>弹出层定位演示<span>arrow</span></p>
+
+<pre name="code" class="js">
+$("#btn_show_position").click(function() {
+	Util.Dialog({
+		title : "位置演示",
+		width: 200,
+		height: 150,
+		fixed: true,
+		content : "text:位置演示",
+		position: {
+			left: "",
+			top: ""
+		}
+	});
+	return false;
+});
+</pre>
+					<button id="btn_show_plt">左上角</button>
+					<button id="btn_show_prt">右上角</button>
+					<button id="btn_show_plb">左下角</button>
+					<button id="btn_show_prb">右下角</button>
+					<button id="btn_show_ptc">顶居中</button>
+					<button id="btn_show_pbc">底居中</button>
+					<button id="btn_show_plc">左居中</button>
+					<button id="btn_show_prc">右居中</button>
+					<button id="btn_show_pco">自定义</button>
+				</li>
+
+				<li>
+					<p>无标题，3秒后关闭<span>arrow</span></p>
+
+<pre name="code" class="js">
+$("#btn_show_ntitle").click(function() {
+	Util.Dialog({
+		title : "无标题，3秒后关闭",
+		boxID : "notitle",
+		fixed : true,
+		content : "text:无标题，3秒后关闭",
+		showtitle : "remove",
+		time: 3000,
+		border : {opacity:"0"},
+		bordercolor : "#666"
+	});
+	return false;
+});
+</pre>
+					<button id="btn_show_ntitle">无标题</button>
+				</li>
+				<li>
+					<p>提示层模式<span>arrow</span></p>
+
+<pre name="code" class="js">
+$("#btn_show_tips").click(function() {
+	Util.Dialog({
+		type: "tips",
+		boxID: "Tip_tips",
+		referID: "btn_show_tips",
+		width: 150,
+		border: { opacity: "0", radius: "3"},
+		closestyle: "orange",
+		arrow: "left",
+		fixed: true,
+		arrowset: {val: "10px"},
+		content: "text:<p style='color:#C72015;'><a href="#download">点击这里下载源码！</a></p>",
+		position: {
+			left: "0px",
+			top: "0px",
+			lin: true,
+			tin: false
+		}
+	});
+	return false;
+});
+</pre>
+					<button id="btn_show_tips_l">在按钮左边</button>
+					<button id="btn_show_tips_r">在按钮右边</button>
+					<button id="btn_show_tips_t">在按钮上边</button>
+					<button id="btn_show_tips_b">在按钮下边</button>
+				</li>
+				<li>
+					<p>对话框模式<span>arrow</span></p>
+
+<pre name="code" class="js">
+$("#btn_show_dialog").click(function() {
+	Util.Dialog({
+		boxID: "XYdialog",
+		title: "对话框",
+		width: 250,
+		height: 100,
+		fixed: true,
+		content: "text:你是码农么？",
+		yesBtn: ["是", function(){
+			var msg = $("#XYdialog").find(".ui_content");
+			msg.html("你骗人！");
+			return false;
+		}],
+		noBtn: ["不是",function(){
+			return true;
+		}],
+		cfns: function(){
+			if (confirm("你真的要关闭对话框么!"))
+			 return true;
+			else
+			 return false;
+		}
+	});
+	return false;
+});
+</pre>
+					<button id="btn_show_dialog">对话框模式</button>
+
+				</li>
+				<li>
+					<p>对于回调函数的使用<span>arrow</span></p>
+
+<pre name="code" class="js">
+$("#btn_read_value").click(function() {
+	var v = $("#callback-value").val();
+	if (v=="好吧，我也愿意！"){
+		$("#callback-value").val("你愿意取我吗？")
+	};
+	Util.Dialog({
+		boxID: "dialog-callback-value",
+		title: "这里将显示页面上输入框里的值",
+		width: 250,
+		height: 100,
+		fixed: true,
+		content: "text:<input type='text' value='' id='read-value'>",
+		ofns: function(){
+			var msg = $("#dialog-callback-value").find(".ui_content");
+			msg.html("<div style='font-size:16px;padding:15px 0;'>"+$("#callback-value").val()+"</div>");
+		},
+		yesBtn: ["愿意", function(){
+			var msg = $("#callback-value");
+			msg.val("好吧，我也愿意！");
+			Util.Dialog({
+				type: "tips",
+				boxID: "Tip_callback_value",
+				referID: "callback-value",
+				width: 150,
+				height: 25,
+				border: { opacity: "0", radius: "3"},
+				closestyle: "orange",
+				arrow: "bottom",
+				fixed: false,
+				arrowset: {val: "10px"},
+				time: 2000,
+				content: "text:<p><a style='color:#C72015;' href=\"#download\">我的值已经改变了哦！</a></p>",
+				position: {
+					left: "0",
+					bottom: "0",
+					lin: true,
+					bin: false
+				}
+			});
+		}]
+	});
+	return false;
+});
+</pre>
+					<input type="text" value="你愿意取我吗？" style="height: 28px;" id="callback-value"><button id="btn_read_value">点我吧</button>
+
+				</li>
+				<li>
+					<p>动画效果<span>arrow</span></p>
+
+<pre name="code" class="js">
+$("#btn_show_login").click(function() {
+	Util.Dialog({
+		boxID: "dialog-login",
+		fixed: true,
+		showtitle: "remove",
+		content: "iframe:demo/login.html",
+		position: {top: "-350"},
+		ofns: function(){
+			$("#dialog-login").animate({top: '+50px'}, 300);
+		}
+	});
+	return false;
+});
+</pre>
+					<button id="btn_show_login">登录</button>
+
+				</li>
+			</ul>
+		</div>
+
+		<h3 id="update">更新：</h3>
+		<dl class="content" id="update-list">
+			<dt>v3.1(2012年07月23日 14:28:50)</dt>
+			<dd>
+				<ol>
+					<li>新增风格参数，可以自定义外观；</li>
+					<li>修改了对话框模式；</li>
+					<li>去掉了复杂的border设置，改为“showborder : true || false”</li>
+					<li>新增了三个方法：“最大化，最小化，还原”；</li>
+					<li>修改了关闭方法及回调；</li>
+					<li>修改了提示层的设置，比原来更方便简单；</li>
+					<li>修复了拖动的一些问题；</li>
+					<li>修复了框架大小设置无效问题；</li>
+					<li>修复了IE6下关闭弹出层时背景失效的问题；</li>
+					<li>优化了弹出层结构；</li>
+					<li>重新整理了下源码，优化了弹出层的叠加和关闭顺序；</li>
+					<li>其他小细节的优化与修改；</li>
+				</ol>
+			</dd>
+			<dt>v3.0(2012年4月24日 17:28:50)</dt>
+			<dd>
+				<ol>
+					<li>重写改写结构，采用九宫格形式；</li>
+					<li>整合普通提示层功能；</li>
+					<li>重写定位方法，支持各种复杂的定位需求；</li>
+					<li>内容获取方面取消了原来的ID；</li>
+					<li>重写了删除方法与多窗口时的层叠顺序处理；</li>
+					<li>修复IE6固定定位后，关闭窗口页面背景消失的问题；</li>
+					<li>其他细节方面的修改</li>
+				</ol>
+			</dd>
+		</dl>
+
+		<h3 id="download">下载：</h3>
+		<p><a href="http://leotheme.cn/wp-content/uploads/Example/js/XYTipsWindow/XYTipsWindow.rar" class="btn_css3_down" title="完整包下载">点击下载</a></p>
+
+		<h3 id="donate">赞助：</h3>
+		<p>支付宝：yltfy2008@gmail.com</p>
+		<p>感谢以下网友的赞助：<br>
+			空白(732863563) | 0☆Ghost(175715434) | lee(98326)
+		</p>
+
+		<p style="text-align:right;margin:30px 0;">By <a href="http://leotheme.cn/" title="Await">Await</a> <a href="#Top" title="返回顶部">返回顶部</a><br /></p>
+	</div>
+</div>
+</body>
+</html>

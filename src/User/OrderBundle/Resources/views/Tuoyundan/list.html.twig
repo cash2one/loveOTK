@@ -1,0 +1,52 @@
+{% extends '::base.html.twig' %}
+{% block title %}托运单列表{% endblock %}
+{% block main %}
+    <div>
+    <form class="searchbar" role="" action="/yundan/yundan" method="get">
+        开单日期
+        从:<input type="text" class="ym-searchfield" name = 'dateStart' onclick ='WdatePicker()' readonly="true" value = {{ dateStart }}>
+        到:<input type="text" class="ym-searchfield" name = 'dateEnd'   onclick ='WdatePicker()'  readonly="true" value = {{ dateEnd }}>
+        发货人:<input type="text" class="ym-searchfield" name="name" value ="{{ name }}">
+        运单:<input type="text" class="ym-searchfield" name="awbno" value="{{ awbno }}">
+        <input type="submit" class="ym-button ym-primary" value="查询">
+    </form>
+    <a href="{{ path("_yundan_new") }}" class="btn btn-primary"><input id="shouyin" type="button" class="ym-button ym-success" value="新增"/></a>
+            <table class="bordertable">
+                <thead>
+                <tr>
+                    <th>运单号</th>
+                    <th>目的城市</th>
+                    <th>品名</th>
+                    <th>操作</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for yundan in list %}
+                    <tr>
+                        <td>
+                            {{ yundan.awbno }}
+                        </td>
+                        <td>
+                            {{ yundan.city }}
+                        </td>
+                        <td>
+                            {{ yundan.pinming }}
+                        </td>
+                        <td>
+                            这里的修改 是有权限的 并且有确认收银后 不让修改
+                            <a href="{{ path('_yundan_edit', { 'id': yundan.id }) }}">修改</a>
+                            |
+                            <a href="{{ path('_yundan_delete', { 'id': yundan.id }) }}" class="delete">作废</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+    </div>
+    <!-- END MAIN PANEL -->
+{% endblock %}
+
+{% block Scripts %}
+    <script src="{{ asset((dd_home_url~"js/plugins/my97/WdatePicker.js")) }}"></script>
+{% endblock %}
+

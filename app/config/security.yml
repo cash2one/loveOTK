@@ -1,0 +1,35 @@
+security:
+    encoders:
+        Admin\UserBundle\Entity\User:
+            algorithm: plaintext
+
+    role_hierarchy:
+#        ROLE_员工  :      ROLE_员工
+#        ROLE_SUPER_ADMIN: [ ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH ]
+
+    providers:
+        administrators:
+            entity: { class: AdminUserBundle:User }
+
+    firewalls:
+        dev:
+            pattern:  ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        main:
+            pattern: ^/
+            anonymous: ~
+            form_login:
+                login_path: _admin_login
+                check_path: _admin_login_check
+                default_target_path: /index
+                always_use_default_target_path: false
+            logout:
+                path: /dd-admin/logout
+
+    access_control:
+        - { path: ^/dd-admin/admin/user*, roles: ROLE_员工  }
+        - { path: ^/yundan/yundan*, roles: ROLE_员工 }
+
+          # 这里等再配置其他的拦截
+

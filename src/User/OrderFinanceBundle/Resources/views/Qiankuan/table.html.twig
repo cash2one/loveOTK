@@ -1,0 +1,48 @@
+{% set summoney = 0   %}
+  {% for yundan in list %}
+      {% set money = 0   %}
+      <tr>
+          <td>
+              <input name="ids" type="checkbox" value="{{ yundan.id }}"/>
+          </td>
+          <td>
+              {{ yundan.awbno }}
+          </td>
+          <td>
+              {% if yundan.lastUpdated is not  null %}
+                  {{ yundan.lastUpdated|date('Y-m-d') }}
+              {% endif %}
+          </td>
+          <td>
+              {{ yundan.city }}
+          </td>
+          <td>
+              {{ yundan.yuejie }}
+              {% set money = money + yundan.yuejie    %}
+          </td>
+          <td>
+              {{ yundan.huidanfu }}
+              {% set money = money + yundan.huidanfu    %}
+          </td>
+          <td>
+              {{ money }}
+          </td>
+          <td>
+              {% if yundan.qiankuanshouyin%} 已收银
+              {% else %}  未收银 {% set summoney = summoney +  money  %}
+              {% endif %}
+          </td>
+          <td>
+              {% if yundan.dateqiankuanshouyin is not  null %}
+                  {{ yundan.dateqiankuanshouyin|date('Y-m-d') }}
+              {% endif %}
+          </td>
+      </tr>
+  {% endfor %}
+
+<script>
+    $(function() {
+        $("#zongji").text("总计欠费: "+ {{ summoney }});
+    })
+</script>
+

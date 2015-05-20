@@ -1,0 +1,176 @@
+{% extends '::base.html.twig' %}
+{% block title %}托运单新增{% endblock %}
+{% block main %}
+    <div class="title">
+        <h4>新建托运单</h4>
+        <a href="/yundan/yundan" class="back">返回列表&nbsp;&gt;</a>
+    </div>
+    <div class="ym-cbox">
+        <form action="{{ path('_yundan_create') }}" class="form-box" method="post" {{ form_enctype(form) }} >
+            {#{{ form_errors(form) }}#}
+            {{ form_row(form._token) }}
+            <div class="ym-g33 ym-gl">
+                <label for="livesearch">单号：</label>
+                {{ form_widget(form.awbno,{'attr': {'class':'ym-searchfield'} }) }}
+            </div>
+            <div class="ym-g33 ym-gl">
+                <label for="livesearch">品名：</label>
+                {{ form_widget(form.pinming,{'attr': {'class':'ym-searchfield'} }) }}
+            </div>
+            <div class="ym-g33 ym-gl">
+                <label for="livesearch">件数：</label>
+                {{ form_widget(form.jianshu,{'attr': {'class':'ym-searchfield'} }) }}
+            </div>
+            <div class="ym-g33 ym-gl">
+                <label for="livesearch">重量(kg)：</label>
+                {{ form_widget(form.zhongliang,{'attr': {'class':'ym-searchfield'} }) }}
+            </div>
+            <div class="ym-g33 ym-gl">
+                <label for="livesearch"> 体积(m3)：</label>
+                {{ form_widget(form.tiji,{'attr': {'class':'ym-searchfield'} }) }}
+            </div>
+            <div class="ym-g33 ym-gl">
+                <label for="livesearch"> 目的城市：</label>
+                {{ form_widget(form.city,{'attr': {'class':'ym-searchfield'} }) }}
+            </div>
+            <div class="ym-g33 ym-gl">
+                <label for="livesearch"> 线路：</label>
+                {{ form_widget(form.xianlu,{'attr': {'class':'ym-searchfield'} }) }}
+            </div>
+
+            <div class="ym-g33 ym-gl">
+                <label for="livesearch"> 发货方：</label>
+                {{ form_widget(form.fahuomingcheng,{'attr': {'class':'ym-searchfield'} }) }}
+            </div>
+            <div class="ym-g33 ym-gl">
+                <label for="livesearch"> 固话：</label>
+                {{ form_widget(form.fahuoguhua,{'attr': {'class':'ym-searchfield'} }) }}
+            </div>
+            <div class="ym-g33 ym-gl">
+                <label for="livesearch"> 手机：</label>
+                {{ form_widget(form.fahuoshouji,{'attr': {'class':'ym-searchfield'} }) }}
+            </div>
+
+            <div class="ym-g33 ym-gl">
+                <label for="livesearch"> 收货方：</label>
+                {{ form_widget(form.shouhoumingcheng,{'attr': {'class':'ym-searchfield'} }) }}
+            </div>
+            <div class="ym-g33 ym-gl">
+                <label for="livesearch"> 固话：</label>
+                {{ form_widget(form.shouhouguhua,{'attr': {'class':'ym-searchfield'} }) }}
+            </div>
+            <div class="ym-g33 ym-gl">
+                <label for="livesearch"> 手机：</label>
+                {{ form_widget(form.shouhoushouji,{'attr': {'class':'ym-searchfield'} }) }}
+            </div>
+
+            <div class="ym-g33 ym-gl">
+                <label for="livesearch"> 提货地址：</label>
+                {{ form_widget(form.tihuodizhi,{'attr': {'class':'ym-searchfield'} }) }}
+            </div>
+            <div class="ym-g33 ym-gl">
+                <label for="livesearch"> 提货电话：</label>
+                {{ form_widget(form.tihuodianhua,{'attr': {'class':'ym-searchfield'} }) }}
+            </div>
+
+            <div class="ym-g33 ym-gl">
+                <label for="livesearch"> 特殊要求：</label>
+                {{ form_widget(form.teshuyaoqiu,{'attr': {'class':'ym-searchfield'} }) }}
+            </div>
+
+            <div class="ym-g33 ym-gl">
+                <label for="livesearch"> 备注：</label>
+                {{ form_widget(form.beizhu,{'attr': {'class':'ym-searchfield'} }) }}
+            </div>
+
+            <div class="ym-g33 ym-gl">
+                <label for="livesearch"> 交接方式：</label>
+                {{ form_widget(form.jiaojiefangshi,{'attr': {'class':'ym-searchfield'} }) }}
+            </div>
+
+            <div class="ym-g33 ym-gl">
+                <label for="livesearch"> 计费方式：</label>
+                {{ form_widget(form.jifeifangshi,{'attr': {'class':'ym-searchfield'} }) }}
+            </div>
+
+            <div class="ym-g33 ym-gl">
+                <label for="livesearch"> 基本运费：</label>
+                {{ form_widget(form.jibenyunfei,{'attr': {'class':'ym-searchfield'} }) }}
+            </div>
+
+            <div class="ym-g33 ym-gl">
+                <label for="livesearch"> 提货费：</label>
+                {{ form_widget(form.tihuofei,{'attr': {'class':'ym-searchfield'} }) }}
+            </div>
+
+            <div class="ym-g33 ym-gl">
+                <label for="livesearch"> 送货费：</label>
+                {{ form_widget(form.songhuofei,{'attr': {'class':'ym-searchfield'} }) }}
+            </div>
+
+            <div class="ym-g33 ym-gl">
+                <label for="livesearch"> 中转费：</label>
+                {{ form_widget(form.zhongzhuanfei,{'attr': {'class':'ym-searchfield'} }) }}
+            </div>
+
+            <div class="ym-g33 ym-gl">
+                <label for="livesearch"> 代收货款：</label>
+                {{ form_widget(form.daishouhuokuan,{'attr': {'class':'ym-searchfield'} }) }}
+            </div>
+
+            <div class="ym-g33 ym-gl">
+                <label for="livesearch"> 其他费用：</label>
+                {{ form_widget(form.qitafeiyong,{'attr': {'class':'ym-searchfield'} }) }}
+            </div>
+
+            <div class="ym-g33 ym-gl">
+                <label for="livesearch"> 结算方式：</label>
+                {{ form_widget(form.jiesuanfangshi,{'attr': {'class':'ym-searchfield'} }) }}
+            </div>
+
+            <div class="ym-g33 ym-gl">
+                <label for="livesearch"> 现付：</label>
+                {{ form_widget(form.xianfu,{'attr': {'class':'ym-searchfield'} }) }}
+            </div>
+
+            <div class="ym-g33 ym-gl">
+                <label for="livesearch"> 到付：</label>
+                {{ form_widget(form.daofu,{'attr': {'class':'ym-searchfield'} }) }}
+            </div>
+
+            <div class="ym-g33 ym-gl">
+                <label for="livesearch"> 回单付：</label>
+                {{ form_widget(form.huidanfu,{'attr': {'class':'ym-searchfield'} }) }}
+            </div>
+
+            <div class="ym-g33 ym-gl">
+                <label for="livesearch"> 回单：</label>
+                {{ form_widget(form.huidan,{'attr': {'class':'ym-searchfield'} }) }}张
+            </div>
+
+            <div class="ym-g33 ym-gl">
+                <label for="livesearch"> 月结：</label>
+                {{ form_widget(form.yuejie,{'attr': {'class':'ym-searchfield'} }) }}
+            </div>
+
+            <div class="ym-g33 ym-gl">
+                <label for="livesearch"> 回扣：</label>
+                {{ form_widget(form.huikou,{'attr': {'class':'ym-searchfield'} }) }}
+            </div>
+
+            <div class="ym-g33 ym-gl">
+                <label for="livesearch"> 是否开发票：</label>
+                {{ form_widget(form.fapiao,{'attr': {'class':'ym-searchfield'} }) }}
+            </div>
+
+            <div class="ym-g33 ym-gl">
+                <label for="livesearch"> 费用说明：</label>
+                {{ form_widget(form.feiyongshuoming,{'attr': {'class':'ym-searchfield'} }) }}
+            </div>
+            <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> 保存/提交</button>
+        </form>
+    </div>
+{% endblock %}
+
+
+

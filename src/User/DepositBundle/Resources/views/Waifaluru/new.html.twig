@@ -1,0 +1,104 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}xx管理{% endblock %}
+{% block main %}
+<div class="title">
+    <h4>新建中转单</h4>
+    <a href="/deposit/deposit" class="back">返回列表&nbsp;&gt;</a>
+</div>
+<div class="ym-cbox">
+<form id="mainForm" action="{{ path('_deposit_create') }}" class="form-box" method="post" {{ form_enctype(form) }} >
+    {#{{ form_errors(form) }}#}
+    {{ form_row(form._token) }}
+    {{ form_widget(form.tuoyundanId, {'attr': {'class':'form-control'},'type':'hidden' }) }}
+    <div class="ym-g33 ym-gl">
+        <label for="livesearch">中转时间：</label>
+        {{ form_widget(form.dateZhongzhuan, {'attr': {'class':'ym-searchfield', 'onclick': 'WdatePicker()', 'readonly':'true'} }) }}
+    </div>
+    <div class="ym-g33 ym-gl">
+        <label for="livesearch">承运公司：</label>
+        {{ form_widget(form.chengyungongsi,{'attr': {'class':'ym-searchfield'} }) }}
+    </div>
+    <div class="ym-g33 ym-gl">
+        <label for="livesearch">中转单号：</label>
+        {{ form_widget(form.zhongzhuandan,{'attr': {'class':'ym-searchfield'} }) }}
+    </div>
+    <div class="ym-g33 ym-gl">
+        <label for="livesearch">本地电话：</label>
+        {{ form_widget(form.bendidianhua,{'attr': {'class':'ym-searchfield'} }) }}
+    </div>
+    <div class="ym-g33 ym-gl">
+        <label for="livesearch">提货电话：</label>
+        {{ form_widget(form.tihuodianhua,{'attr': {'class':'ym-searchfield'} }) }}
+    </div>
+    <div class="ym-g33 ym-gl">
+        <label for="livesearch">联系人：</label>
+        {{ form_widget(form.lianxiren,{'attr': {'class':'ym-searchfield'} }) }}
+    </div>
+    <div class="ym-g33 ym-gl">
+        <label for="livesearch">联系地址：</label>
+        {{ form_widget(form.lianxidizhi,{'attr': {'class':'ym-searchfield'} }) }}
+    </div>
+    <div class="ym-g33 ym-gl">
+        <label for="livesearch">重量：</label>
+        {{ form_widget(form.zhongliang,{'attr': {'class':'ym-searchfield'} }) }}
+    </div>
+    <div class="ym-g33 ym-gl">
+        <label for="livesearch">体积：</label>
+        {{ form_widget(form.tiji,{'attr': {'class':'ym-searchfield'} }) }}
+    </div>
+    <div class="ym-g33 ym-gl">
+        <label for="livesearch">外发员：</label>
+        {{ form_widget(form.waifayuan,{'attr': {'class':'ym-searchfield'} }) }}
+    </div>
+    <div class="ym-g33 ym-gl">
+        <label for="livesearch">预计到达时间：</label>
+        {{ form_widget(form.dateDaoda, {'attr': {'class':'ym-searchfield', 'onclick': 'WdatePicker()', 'readonly':'true'} }) }}
+    </div>
+    <div class="ym-g33 ym-gl">
+        <label for="livesearch">应付运费：</label>
+        {{ form_widget(form.yingfuyunfei,{'attr': {'class':'ym-searchfield'} }) }}
+    </div>
+    <div class="ym-g33 ym-gl">
+        <label for="livesearch">应付送货费：</label>
+        {{ form_widget(form.yingfusonghuofei,{'attr': {'class':'ym-searchfield'} }) }}
+    </div>
+    <div class="ym-g33 ym-gl">
+        <label for="livesearch">应付其他：</label>
+        {{ form_widget(form.yingfuqita,{'attr': {'class':'ym-searchfield'} }) }}
+    </div>
+    <div class="ym-g33 ym-gl">
+        <label for="livesearch">预付运费：</label>
+        {{ form_widget(form.yufuyunfei,{'attr': {'class':'ym-searchfield'} }) }}
+    </div>
+    <div class="ym-g33 ym-gl">
+    中转额总:<span id="sumyunfei">0</span>元
+    </div>
+    <div class="ym-g33 ym-gl">
+        {% set money = 0   %}
+        代收货款:{{ tuoyundan.daishouhuokuan }}
+        {% set money = money + tuoyundan.daishouhuokuan    %}
+        到付运费:{{ tuoyundan.daofu }}
+        {% set money = money + tuoyundan.daofu    %}
+        到付总额:<span id="daofuzonge">{{ money }}</span>元
+    </div>
+
+    <div class="ym-g33 ym-gl">
+    应收余额:<span id="yingshouyue"></span>
+    应付余额:<span id="yingfuyue"></span>
+    </div>
+    <div class="ym-g33 ym-gl">
+        <label for="livesearch">结算方式：</label>
+        {{ form_widget(form.zhongzhuanjiesuanfangshi,{'attr': {'class':'ym-searchfield'} }) }}
+    </div>
+
+    <button class="btn btn-primary" type="submit"><i class="fa fa-save"></i> 保存/提交</button>
+</form>
+</div>
+{% endblock %}
+
+{% block Scripts %}
+    <script src="{{ asset((dd_home_url~"js/plugins/my97/WdatePicker.js")) }}"></script>
+    <script src="{{ asset((dd_home_url~"js/waifaluru.js")) }}"></script>
+{% endblock %}
+

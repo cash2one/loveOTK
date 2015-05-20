@@ -1,0 +1,43 @@
+{% set money = 0 %}
+  {% for z in list %}
+      <tr>
+          <td>
+              <input name="ids" type="checkbox" value="{{ z.id }}"/>
+          </td>
+          <td>
+              {{ z.zhongzhuandan }}
+          </td>
+          <td>
+              {{ z.dateZhongzhuan|date('Y-m-d') }}
+          </td>
+          <td>
+              {% if z.jiekuanshouyin %} 已收银
+              {% else %}未收银{% set money = money + z.jiesuanjine %}
+              {% endif %}
+          </td>
+          <td>
+              {{ z.daofuzonge }}
+          </td>
+          <td>
+              {{ z.zhongzhuanzonge }}
+          </td>
+          <td>
+              {{ z.jiesuanjine }}
+          </td>
+          <td>
+              {{ z.zhongzhuanjiesuanfangshi }}
+          </td>
+          <td>
+              {% if z.datejiekuanshouyin is not  null  %}
+                  {{ z.datejiekuanshouyin|date('Y-m-d') }}
+              {% endif %}
+          </td>
+      </tr>
+  {% endfor %}
+
+<script>
+    $(function() {
+        $("#zongji").text("总计欠费: "+ {{ money }});
+    })
+</script>
+

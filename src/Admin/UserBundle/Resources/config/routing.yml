@@ -1,0 +1,9 @@
+_admin_security:
+    resource: "@AdminUserBundle/Controller/SecurityController.php"
+    type: annotation
+
+_admin_login_check:
+    path: /login_check
+
+_admin_logout:
+    path: /logout

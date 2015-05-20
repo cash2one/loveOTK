@@ -1,0 +1,112 @@
+{% extends '::base.html.twig' %}
+{% block title %}欠款收银{% endblock %}
+{% block main %}
+    {% set summoney = 0   %}
+    <div class="ym-cbox">
+        <form class="searchbar" role="" action="/order/qiankuan" method="get">
+            开单日期
+            从:<input type="text" class="ym-searchfield" name='dateStart' onclick='WdatePicker()' readonly="true"
+                     value= {{ dateStart }}>
+            到:<input type="text" class="ym-searchfield" name='dateEnd' onclick='WdatePicker()' readonly="true"
+                     value= {{ dateEnd }}>
+            收银确认:<select name="qiankuan">
+                {% if qiankuan is empty%}
+                    <option value=""selected="true">全部</option>
+                    <option value="0">未收银</option>
+                    <option value="1">已收银</option>
+                {% else %}
+                    {% if qiankuan == 0 %}
+                        <option value="">全部</option>
+                        <option value="0" selected="true">未收银</option>
+                        <option value="1">已收银</option>
+                    {% else %}
+                        <option value="">全部</option>
+                        <option value="0">未收银</option>
+                        <option value="1" selected="true">已收银</option>
+                    {% endif %}
+                {% endif %}
+            </select>
+            发货人:<input type="text" class="ym-searchfield" name="name" value="{{ name }}">
+            运单:<input type="text" class="ym-searchfield" name="awbno" value="{{ awbno }}">
+            <input type="submit" class="ym-button ym-primary" value="查询">
+        </form>
+        <input id="shouyin" type="button" class="ym-button ym-success" value="确认收银"/>
+        <input id="quxiaoshouyin" type="button" class="ym-button ym-danger" value="取消确认"/>
+        <table class="bordertable">
+                <thead>
+                <tr>
+                    <th><input id="chk_all" type="checkbox">全选</input> </th>
+                    <th>运单号</th>
+                    <th>开单日期</th>
+                    <th>目的城市</th>
+                    <th>月结</th>
+                    <th>回单付</th>
+                    <th>欠款金额</th>
+                    <th>收银确认</th>
+                    <th>收银时间</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for yundan in list %}
+                    {% set money = 0   %}
+                    <tr>
+                        <td>
+                            <input name="ids" type="checkbox" value="{{ yundan.id }}"/>
+                        </td>
+                        <td>
+                            {{ yundan.awbno }}
+                        </td>
+                        <td>
+                            {% if yundan.lastUpdated is not  null %}
+                            {{ yundan.lastUpdated|date('Y-m-d') }}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {{ yundan.city }}
+                        </td>
+                        <td>
+                            {{ yundan.yuejie }}
+                                {% set money = money + yundan.yuejie    %}
+                        </td>
+                        <td>
+                            {{ yundan.huidanfu }}
+                                {% set money = money + yundan.huidanfu    %}
+                        </td>
+                        <td>
+                            {{ money }}
+                        </td>
+                        <td>
+                            {% if yundan.qiankuanshouyin%} 已收银
+                            {% else %}  未收银 {% set summoney = summoney +  money  %}
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if yundan.dateqiankuanshouyin is not  null %}
+                            {{ yundan.dateqiankuanshouyin|date('Y-m-d') }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        <div class="ym-g100 total-box">
+            <p id="zongji">总计欠费: {{ summoney }}</p>
+        </div>
+    <!-- END MAIN PANEL -->
+    </div>
+{% endblock %}
+{% block Scripts %}
+    <script type="text/javascript">
+        if (typeof Util == "undefined") var Util = {};
+        //配置信息
+        Util.config = {
+            JSfile: "{{ asset((dd_home_url~"js/plugins/XYTipsWindow/js/core/")) }}",					//设置JS文件夹路径
+            loadingICO: " {{ asset((dd_home_url~"js/plugins/XYTipsWindow/js/core/loading.gif")) }}"		//默认载入时图片路径
+        };
+    </script>
+    <script src="{{ asset((dd_home_url~"js/plugins/XYTipsWindow/js/core/XY_Base.js")) }}"></script>
+    <script src="{{ asset((dd_home_url~"js/plugins/XYTipsWindow/js/core/XY_Dialog.js")) }}"></script>
+    <script src="{{ asset((dd_home_url~"js/plugins/my97/WdatePicker.js")) }}"></script>
+    <script src="{{ asset((dd_home_url~"js/qiankuan.js")) }}"></script>
+{% endblock %}
+

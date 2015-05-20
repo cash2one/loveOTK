@@ -1,0 +1,23 @@
+ {% for waifa in list %}
+                    <tr>
+                        <td>
+                            {% if waifa.xianfushouyin or waifa.jiekuanshouyin %}
+                            {% else %}
+                                <input name="ids" type="checkbox" value="{{ waifa.id }}"/>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {{ waifa.zhongzhuandan }}
+                        </td>
+                        <td>
+                            {% if waifa.shenhe %} 已审核
+                            {% else %} 未审核
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if waifa.shenhe %} 查看
+                            {% else %} <a href="{{ path('_deposit_edit', { 'id': waifa.id }) }}">修改</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
